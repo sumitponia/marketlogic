@@ -26,11 +26,12 @@ Swagger and h2 console are enabled for easy access to the endpoints and the data
 2. Project service : http://localhost:8081/h2-console/
 
 ## Scalability :
-Multiple instances of onesearch service can be spawned and referred in project service as : 
+Multiple instances of onesearch service can be spawned and these instances can be referred in project service at runtime as:
 ```
-onesearch.ribbon.listOfServers=http://localhost:8081,http://localhost:8082
+--onesearch.ribbon.listOfServers=http://localhost:8081,http://localhost:8082
 ```
 To reduce complexity in running these applications I have not enabled service discovery, but ribbon will take care of load balancing with above property.
+#### As we are using in memory database, the data on multiple instances of onesearch service will not be the same.
 
 ## Availability : 
 Project service calls the onesearch service endpoint as an async task. Using spring retry, project service will keep on retrying to connect to onesearch service as per following properties in project service :
@@ -42,10 +43,20 @@ app.backoff-delay-multiplier = 5
 Even after the retries if the request fails, then an entry is made into a new table for failed requests. For sake of reducing complexity a scheduler is not written to pick the failed requests and try again. But this can be easily achieved.
 
 ### Security : 
-To limit complexity of running these projects, all URLs except for swagger and h2-console are basic auth secured.
+To limit complexity of running these projects, all URLs except for swagger and h2-console are basic auth secured. Credentials are defined in application.properties as : 
+```
+//For project service
+app.user-name=john
+app.password=password
+
+//For onesearch service
+app.user-name=jane
+app.password=password
+```
+The rest calls from project service to onesearch service uses these credentials as well.
 
 ### Properties
-All the properties in these microservices can be changed at startup. For example if you want to update the port you can pass new port number as -Dserver.port =9000.
+All the properties in these microservices can be changed at startup. For example if you want to update the port you can pass new port number as --server.port =9000.
 
 If you are changing the username/password/port in onesearch service, make sure to pass them as runtime argument to project service.
 
