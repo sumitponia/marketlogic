@@ -5,7 +5,7 @@ This repository contains two projects :
 
 ## Demo
 I have prepared a recorded demo for this project, you can watch it here : 
-[![MarketLogic Demo](http://img.youtube.com/vi/iMTfObbL5u0/0.jpg)](http://www.youtube.com/watch?v=iMTfObbL5u0 "MarketLogic Demo")
+[![MarketLogic Demo](https://img.youtube.com/vi/iMTfObbL5u0/0.jpg)](https://www.youtube.com/watch?v=iMTfObbL5u0 "MarketLogic Demo")
 
 ## Build : 
 For both the projects, in the root directory run :
