@@ -15,13 +15,15 @@ For both the projects, in their respective the root directory run :
 java -jar target/onesearch-service-1.0.jar //for onesearch service
 java -jar target/project-service-1.0.jar   //for project service
 ```
-## URLs:
+## URLs :
 Swagger and h2 console are enabled for easy access to the endpoints and the database in each service.
-### Swagger URL :
+### Swagger
+The swagger ui can be accessed without any credentials; but to make the requests from swagger, authentication is requried.
 1. Project service : http://localhost:8080/swagger-ui/
 2. Search service : http://localhost:8081/swagger-ui/
 
-### H2 URL
+### H2
+Username and password for H2 console is mentioned in application.properties file.
 1. Project service : http://localhost:8080/h2-console/
 2. Project service : http://localhost:8081/h2-console/
 
@@ -42,7 +44,7 @@ app.backoff-delay-multiplier = 5
 ```
 Even after the retries if the request fails, then an entry is made into a new table for failed requests. For sake of reducing complexity a scheduler is not written to pick the failed requests and try again. But this can be easily achieved.
 
-### Security : 
+## Security : 
 To limit complexity of running these projects, all URLs except for swagger and h2-console are basic auth secured. Credentials are defined in application.properties as : 
 ```
 //For project service
@@ -55,12 +57,12 @@ app.password=password
 ```
 The rest calls from project service to onesearch service uses these credentials as well.
 
-### Properties
+## Application Properties :
 All the properties in these microservices can be changed at startup. For example if you want to update the port you can pass new port number as --server.port =9000.
 
 If you are changing the username/password/port in onesearch service, make sure to pass them as runtime argument to project service.
 
-Project Service
+### Project Service
 ```
 server.port=8080
 spring.datasource.url=jdbc:h2:mem:testdb
@@ -81,7 +83,7 @@ spring.jackson.serialization.INDENT_OUTPUT=true
 onesearch.ribbon.listOfServers=http://localhost:8081
 spring.jpa.properties.hibernate.show_sql=true
 ```
-Onesearch Service
+### Onesearch Service
 ```
 server.port=8081
 spring.datasource.url=jdbc:h2:mem:testdb
