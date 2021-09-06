@@ -1,7 +1,11 @@
-# Market Logic
+# MarketLogic
 This repository contains two projects :
 1. Onesearch service : For searching the content in project snapshots
 2. Project service : For CRUD operations,fetching and publishing the project
+
+## Demo
+I have prepared a recorded demo for this project, you can watch it here : 
+[![MarketLogic Demo](http://img.youtube.com/vi/iMTfObbL5u0/0.jpg)](http://www.youtube.com/watch?v=iMTfObbL5u0 "MarketLogic Demo")
 
 ## Build : 
 For both the projects, in the root directory run :
